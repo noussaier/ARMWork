@@ -7,18 +7,18 @@
 
   <Targets>
     <Target>
-      <TargetName>Open407VC</TargetName>
+      <TargetName>Olimex_E407</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F407VG</Device>
+          <Device>STM32F407ZG</Device>
           <Vendor>STMicroelectronics</Vendor>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x80FFFFF) CLOCK(25000000) CPUTYPE("Cortex-M4") FPU2</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>"Startup\ST\STM32F4xx\startup_stm32f4xx.s" ("STM32F4xx Startup Code")</StartupFile>
           <FlashDriverDll>UL2CM3(-O207 -S0 -C0 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F4xx_1024 -FS08000000 -FL0100000)</FlashDriverDll>
-          <DeviceId>6103</DeviceId>
+          <DeviceId>6105</DeviceId>
           <RegisterFile>stm32f4xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
@@ -43,14 +43,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Open407VC\</OutputDirectory>
-          <OutputName>Open407VC</OutputName>
+          <OutputDirectory>.\STM32-E407\</OutputDirectory>
+          <OutputName>Olimex_E407</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>0</BrowseInformation>
-          <ListingPath>.\Open407VC\</ListingPath>
+          <ListingPath>.\STM32-E407\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -166,7 +166,7 @@
             <DriverSelection>4104</DriverSelection>
           </Flash1>
           <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
         </Utilities>
         <TargetArmAds>
@@ -348,7 +348,7 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER, OPEN407VC, HSE_VALUE=8000000, ARMCMX, STDSERIAL=3</Define>
+              <Define>USE_STDPERIPH_DRIVER, OLIMEX_E407, HSE_VALUE=12000000, ARMCMX, STDSERIAL=3</Define>
               <Undefine></Undefine>
               <IncludePath>..\inc;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\Standalone;..\..\..\..\..\STM32Libraries\armcmx;..\..\..\..\..\STM32Libraries\armcmx\utility</IncludePath>
             </VariousControls>
