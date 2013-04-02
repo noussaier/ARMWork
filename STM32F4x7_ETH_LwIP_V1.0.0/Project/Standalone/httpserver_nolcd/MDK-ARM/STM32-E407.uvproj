@@ -166,7 +166,7 @@
             <DriverSelection>4104</DriverSelection>
           </Flash1>
           <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
         </Utilities>
         <TargetArmAds>
@@ -348,7 +348,7 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER, OLIMEX_E407, HSE_VALUE=12000000, ARMCMX, STDSERIAL=3</Define>
+              <Define>USE_STDPERIPH_DRIVER, OLIMEX_STM_E407, HSE_VALUE=12000000, ARMCMX, STDSERIAL=3</Define>
               <Undefine></Undefine>
               <IncludePath>..\inc;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\Standalone;..\..\..\..\..\STM32Libraries\armcmx;..\..\..\..\..\STM32Libraries\armcmx\utility</IncludePath>
             </VariousControls>
@@ -425,11 +425,6 @@
               <FileName>fs.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\fs.c</FilePath>
-            </File>
-            <File>
-              <FileName>serial_debug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\serial_debug.c</FilePath>
             </File>
             <File>
               <FileName>httpd_cgi_ssi.c</FileName>
@@ -742,19 +737,24 @@
               <FilePath>..\..\..\..\..\STM32Libraries\armcmx\usart.c</FilePath>
             </File>
             <File>
-              <FileName>stm32_open407vc.c</FileName>
+              <FileName>stm_eval_compat.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm32_open407vc.c</FilePath>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm_eval_compat.c</FilePath>
             </File>
             <File>
-              <FileName>stm32_open407vc.h</FileName>
+              <FileName>stm_eval_compat.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm32_open407vc.h</FilePath>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm_eval_compat.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4_discovery.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm32f4_discovery.h</FilePath>
+            </File>
+            <File>
+              <FileName>olimex_stm_e407.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\olimex_stm_e407.h</FilePath>
             </File>
           </Files>
         </Group>
