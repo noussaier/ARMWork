@@ -427,11 +427,6 @@
               <FilePath>..\src\fs.c</FilePath>
             </File>
             <File>
-              <FileName>serial_debug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\serial_debug.c</FilePath>
-            </File>
-            <File>
               <FileName>httpd_cgi_ssi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\httpd_cgi_ssi.c</FilePath>
@@ -742,11 +737,6 @@
               <FilePath>..\..\..\..\..\STM32Libraries\armcmx\usart.c</FilePath>
             </File>
             <File>
-              <FileName>stm32_open407vc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm32_open407vc.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32_open407vc.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm32_open407vc.h</FilePath>
@@ -755,6 +745,16 @@
               <FileName>stm32f4_discovery.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm32f4_discovery.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm_eval_compat.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm_eval_compat.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm_eval_compat.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm_eval_compat.h</FilePath>
             </File>
           </Files>
         </Group>
