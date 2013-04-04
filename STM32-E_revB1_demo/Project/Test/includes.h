@@ -28,8 +28,8 @@
 #include "arm_comm.h"
 #include "iar_stm32f217ze_sk.h"
 
-#include "stm32f2xx.h"
-#include "stm32f2xx_conf.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_conf.h"
 
 
 //#include "drv_glcd_cnfg.h"

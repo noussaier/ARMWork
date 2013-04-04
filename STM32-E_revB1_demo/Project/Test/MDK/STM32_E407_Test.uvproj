@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>STM32_E407_Test</TargetName>
+      <TargetName>STM_E407_Test</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -348,9 +348,9 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>__CORE__=7</Define>
+              <Define>USE_STDPERIPH_DRIVER,ARMCMX,OLIMEX_STM_E407,HSE_VALUE=12000000,__CORE__=7</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Test;..\..\..\board;..\..\..\..\stm32library\STM32F2xx_StdPeriph_Driver\inc;..\..\..\..\stm32library\CMSIS\STM32F2xx;..\..\..\modules;..\Ethernet\app;..\Ethernet\uip;..\Ethernet\uip\httpd;..\..\..\..\stm32library\STM32_ETH_Driver\inc;..\USB\app;..\..\..\..\stm32library\STM32_USB_Device_Library\Core\inc;..\..\..\..\stm32library\STM32_USB_OTG_Driver\inc;..\..\..\..\stm32library\STM32_USB_Device_Library\Class\hid\inc</IncludePath>
+              <IncludePath>..\..\Test;..\..\..\board;..\..\..\modules;..\Ethernet\app;..\Ethernet\uip;..\Ethernet\uip\httpd;..\USB\app;..\..\..\..\stm32library\STM32_USB_Device_Library\Core\inc;..\..\..\..\stm32library\STM32_USB_OTG_Driver\inc;..\..\..\..\stm32library\STM32_USB_Device_Library\Class\hid\inc;..\..\..\..\STM32Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\STM32Libraries\armcmx;..\..\..\..\STM32Libraries\STM32F4x7_ETH_Driver\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -392,11 +392,6 @@
           <GroupName>user_main</GroupName>
           <Files>
             <File>
-              <FileName>startup_stm32f4xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\startup_stm32f4xx.s</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\main.c</FilePath>
@@ -407,24 +402,24 @@
               <FilePath>..\includes.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f2xx_conf.h</FileName>
+              <FileName>stm32f4xx_conf.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\stm32f2xx_conf.h</FilePath>
+              <FilePath>..\stm32f4xx_conf.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f2xx_it.c</FileName>
+              <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\stm32f2xx_it.c</FilePath>
+              <FilePath>..\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f2xx_it.h</FileName>
+              <FileName>stm32f4xx_it.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\stm32f2xx_it.h</FilePath>
+              <FilePath>..\stm32f4xx_it.h</FilePath>
             </File>
             <File>
-              <FileName>system_stm32f2xx.c</FileName>
+              <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\system_stm32f2xx.c</FilePath>
+              <FilePath>..\..\..\..\STM32Libraries\armcmx\utility\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -445,6 +440,21 @@
               <FileName>iar_stm32f217ze_sk.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\board\iar_stm32f217ze_sk.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4x7_eth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\STM32Libraries\STM32F4x7_ETH_Driver\src\stm32f4x7_eth.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4x7_eth.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\STM32Libraries\STM32F4x7_ETH_Driver\inc\stm32f4x7_eth.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4x7_eth_conf_template.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\STM32Libraries\STM32F4x7_ETH_Driver\inc\stm32f4x7_eth_conf_template.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -490,6 +500,46 @@
               <FileName>Sin_Table.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\modules\Sin_Table.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Ethernet</GroupName>
+          <Files>
+            <File>
+              <FileName>clock-arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Ethernet\app\clock-arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>ethernet.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Ethernet\app\ethernet.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock-arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Ethernet\app\clock-arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>ethernet.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Ethernet\app\ethernet.h</FilePath>
+            </File>
+            <File>
+              <FileName>tapdev.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Ethernet\app\tapdev.h</FilePath>
+            </File>
+            <File>
+              <FileName>uip-conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Ethernet\app\uip-conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>uipopt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Ethernet\app\uipopt.h</FilePath>
             </File>
           </Files>
         </Group>

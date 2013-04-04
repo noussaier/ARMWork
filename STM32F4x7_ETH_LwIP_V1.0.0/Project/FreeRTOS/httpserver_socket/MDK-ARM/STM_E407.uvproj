@@ -12,13 +12,13 @@
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F407IG</Device>
+          <Device>STM32F407VG</Device>
           <Vendor>STMicroelectronics</Vendor>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x80FFFFF) CLOCK(25000000) CPUTYPE("Cortex-M4") FPU2</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>"Startup\ST\STM32F4xx\startup_stm32f4xx.s" ("STM32F4xx Startup Code")</StartupFile>
           <FlashDriverDll>UL2CM3(-O207 -S0 -C0 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F4xx_1024 -FS08000000 -FL0100000)</FlashDriverDll>
-          <DeviceId>6104</DeviceId>
+          <DeviceId>6103</DeviceId>
           <RegisterFile>stm32f4xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
@@ -29,7 +29,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>SFD\ST\STM32F4xx\STM32F4xx.sfr</SFDFile>
+          <SFDFile>SFD\ST\STM32F4xx\STM32F40x.sfr</SFDFile>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
@@ -43,14 +43,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\STM324xG_EVAL\</OutputDirectory>
-          <OutputName>STM324xG_EVAL</OutputName>
+          <OutputDirectory>.\STM_E407\</OutputDirectory>
+          <OutputName>STM_E407</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>0</BrowseInformation>
-          <ListingPath>.\STM324xG_EVAL\</ListingPath>
+          <ListingPath>.\STM_E407\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -100,7 +100,7 @@
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments>-MPU</SimDllArguments>
+          <SimDllArguments>-MPU -REMAP</SimDllArguments>
           <SimDlgDll>DCM.DLL</SimDlgDll>
           <SimDlgDllArguments>-pCM4</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
@@ -207,7 +207,7 @@
             <hadIRAM>1</hadIRAM>
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
-            <RvdsVP>1</RvdsVP>
+            <RvdsVP>2</RvdsVP>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -348,9 +348,9 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F4XX,USE_STM324xG_EVAL,__FPU_PRESENT=0</Define>
+              <Define>USE_STDPERIPH_DRIVER,OLIMEX_STM_E407,HSE_VALUE=12000000,STM32F4XX,USE_STM324xG_EVAL,__FPU_PRESENT=1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\inc;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\STM32_EVAL\Common;..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\FreeRTOS;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\portable\MDK-ARM\ARM_CM3;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\include</IncludePath>
+              <IncludePath>..\inc;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\STM32_EVAL\Common;..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\FreeRTOS;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\portable\MDK-ARM\ARM_CM3;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\include;..\..\..\..\..\STM32Libraries\armcmx</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,16 +388,6 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
-        <Group>
-          <GroupName>CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\system_stm32f4xx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
         <Group>
           <GroupName>MDK-ARM</GroupName>
           <Files>
@@ -437,14 +427,14 @@
               <FilePath>..\src\fs.c</FilePath>
             </File>
             <File>
-              <FileName>httpserver-netconn.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\httpserver-netconn.c</FilePath>
-            </File>
-            <File>
               <FileName>serial_debug.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\serial_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>httpserver-socket.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\httpserver-socket.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -691,6 +681,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -700,21 +700,6 @@
               <FileName>stm32f4x7_eth.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Libraries\STM32F4x7_ETH_Driver\src\stm32f4x7_eth.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STM324xG_EVAL</GroupName>
-          <Files>
-            <File>
-              <FileName>stm324xg_eval_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval_lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm324xg_eval.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -750,6 +735,81 @@
               <FileName>queue.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\queue.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>armcmx</GroupName>
+          <Files>
+            <File>
+              <FileName>olimex_stm_e407.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\olimex_stm_e407.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm_eval_compat.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm_eval_compat.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm_eval_compat.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm_eval_compat.h</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>armcmx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\armcmx.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>SPIBus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\SPIBus.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>pgm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\pgm.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>armcmxlib</GroupName>
+          <Files>
+            <File>
+              <FileName>ColorLCDShield.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmxlib\GLCD\ColorLCDShield\ColorLCDShield.h</FilePath>
+            </File>
+            <File>
+              <FileName>ColorLCDShield.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmxlib\GLCD\ColorLCDShield\ColorLCDShield.cpp</FilePath>
             </File>
           </Files>
         </Group>

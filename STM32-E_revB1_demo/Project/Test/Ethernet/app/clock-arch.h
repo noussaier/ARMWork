@@ -17,7 +17,7 @@
 **************************************************************************/
 //#include "my_includes.h"
 #include <stdint.h>
-#include "stm32f2xx_conf.h"
+#include "stm32f4xx_conf.h"
 
 #ifndef __CLOCK_ARCH_H__
 #define __CLOCK_ARCH_H__

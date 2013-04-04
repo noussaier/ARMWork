@@ -13,10 +13,14 @@
 #define  __ETHERNET_H
 
 #include <stdint.h>
-#include "stm32f2xx_conf.h"
+#include "stm32f4xx_conf.h"
 
 #include "ethernet.h"
+#if defined(OLIMEX_STM_E407)
+#include "stm32f4x7_eth.h"
+#else
 #include "stm32_eth.h"
+#endif
 #include "clock-arch.h"
 
 #include "timer.h"

@@ -152,7 +152,7 @@
 
 /************************* PLL Parameters *************************************/
 
-#if defined (OLIMEX_E407)
+#if defined (OLIMEX_STM_E407)
 #warning "PLL params for Olimex STM32_E407 selected."
 /* PLLVCO = (HSE_VALUE / PLL_M) * PLL_N */   
 #define PLL_M   12 /* (HSE_VALUE / 1000000) */  /* Possible value 0 and 63 */
