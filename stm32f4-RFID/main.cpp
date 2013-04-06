@@ -15,7 +15,7 @@
 
 #include "armcmx.h"
 #include "i2c.h"
-#include "utility/stm32f4_discovery.h"
+#include "board/stm32_open407vc.h"
 
 #include "LCD/LiquidCrystal.h"
 #include "RTC/DS1307.h"

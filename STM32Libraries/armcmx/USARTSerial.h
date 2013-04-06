@@ -13,12 +13,12 @@
 
 #include <stm32f4xx_usart.h>
 
-#include "cmcore.h"
+#include "armcmx.h"
 #include "usart.h"
 #include "Stream.h"
 
 class USARTSerial : public Stream {
-	USARTStruct port;
+	usart port;
 	GPIOPin pinrx, pintx, pincts, pindtr;
 
 public:

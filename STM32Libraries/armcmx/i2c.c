@@ -10,24 +10,24 @@
 #include "i2c.h"
 
 // for IRQ Handler
-I2CBuffer * I2CBuf[3];
+I2CBuffer * I2CBufPtr[3];
 
 void i2c_init(i2c * i2cptr, I2C_TypeDef * I2Cx, GPIOPin scl, GPIOPin sda) {
 	if ( I2Cx == I2C2 ) {
 		i2cptr->I2Cx = I2C2;
 		i2cptr->scl = scl;
 		i2cptr->sda = sda;
-		I2CBuf[1] = & i2cptr->I2CBuf;
+		I2CBufPtr[1] = & i2cptr->I2CBuf;
 	} else if ( I2Cx == I2C3 ) {
 		i2cptr->I2Cx = I2C3;
 		i2cptr->scl = scl;
 		i2cptr->sda = sda;
-		I2CBuf[2] = & i2cptr->I2CBuf;
+		I2CBufPtr[2] = & i2cptr->I2CBuf;
 	} else { // default 
 		i2cptr->I2Cx = I2C1;
 		i2cptr->scl = scl;
 		i2cptr->sda = sda;
-		I2CBuf[0] = & i2cptr->I2CBuf;
+		I2CBufPtr[0] = & i2cptr->I2CBuf;
 	}
 }
 
@@ -300,12 +300,12 @@ boolean i2c_start_receive(i2c * wire) {
  *
  *************************************************************************/
 void I2C1_EV_IRQHandler(void) {
-	I2CBuf[0]->flagstatus = I2C_GetLastEvent(I2C1);
-	switch(I2CBuf[0]->flagstatus) {
+	I2CBufPtr[0]->flagstatus = I2C_GetLastEvent(I2C1);
+	switch(I2CBufPtr[0]->flagstatus) {
 		case I2C_EVENT_MASTER_BYTE_TRANSMITTED:
-			if ( I2CBuf[0]->position < I2CBuf[0]->count ) {
-				I2C_SendData(I2C1, I2CBuf[0]->tx[I2CBuf[0]->position++]);
-				I2CBuf[0]->watch = millis();
+			if ( I2CBufPtr[0]->position < I2CBufPtr[0]->count ) {
+				I2C_SendData(I2C1, I2CBufPtr[0]->tx[I2CBufPtr[0]->position++]);
+				I2CBufPtr[0]->watch = millis();
 				//I2C1Buffer.mode = I2C_MODE_IDLE;
 			} else {
 				// done.
@@ -314,15 +314,15 @@ void I2C1_EV_IRQHandler(void) {
 			break;
 			
 		case I2C_EVENT_MASTER_BYTE_RECEIVED:
-			if ( I2CBuf[0]->position + 1 == I2CBuf[0]->count ) {
+			if ( I2CBufPtr[0]->position + 1 == I2CBufPtr[0]->count ) {
 				// Disable Acknowledgement 
 				I2C_AcknowledgeConfig(I2C1, DISABLE);
 				// Send STOP Condition 
 				I2C_GenerateSTOP(I2C1, ENABLE);
 			}
-			I2CBuf[0]->rx[I2CBuf[0]->position++] = I2C_ReceiveData(I2C1);
-			I2CBuf[0]->watch = millis();
-			if (I2CBuf[0]->position == I2CBuf[0]->count) {
+			I2CBufPtr[0]->rx[I2CBufPtr[0]->position++] = I2C_ReceiveData(I2C1);
+			I2CBufPtr[0]->watch = millis();
+			if (I2CBufPtr[0]->position == I2CBufPtr[0]->count) {
 				// done.
 				I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_ERR | I2C_IT_BUF, DISABLE );
 				// Enable Acknowledgement to be ready for another reception 
@@ -353,6 +353,6 @@ void I2C1_ER_IRQHandler(void) {
     I2C_GenerateSTOP(I2C1,ENABLE);
     I2C_ClearFlag(I2C1,I2C_FLAG_AF);
   }
-  I2CBuf[0]->mode = I2C_MODE_IDLE;
-  I2CBuf[0]->flagstatus = levt | 0x80000000;
+  I2CBufPtr[0]->mode = I2C_MODE_IDLE;
+  I2CBufPtr[0]->flagstatus = levt | 0x80000000;
 }

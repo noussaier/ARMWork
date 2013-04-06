@@ -52,6 +52,8 @@ class I2CWire : public Stream
 //    void onRequest( void (*)(void) );
   
     using Print::write;
+    
+    uint32 flagstatus() { return i2cbuf.I2CBuf.flagstatus; }
 };
 
 //extern I2CWire Wire1(I2C1);

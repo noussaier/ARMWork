@@ -17,7 +17,7 @@
 #include "gpio.h"
 #include "delay.h"
 #include "usart.h"
-#include "i2c1_drv.h"
+//#include "i2c1_drv.h"
 
 //#include "ST7032i.h"
 static USART USerial3;

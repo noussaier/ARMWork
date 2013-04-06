@@ -14,13 +14,13 @@
 
 #include "stm32f4xx_it.h"
 
-#include "cmcore.h"
+#include "armcmx.h"
 #include "gpio.h"
 #include "delay.h"
 #include "I2CWire.h"
 #include "USARTSerial.h"
 
-#include "ChLCD/ST7032i.h"
+#include "LCD/ST7032i.h"
 #include "RTC/DS1307.h"
 
 USARTSerial Serial6(USART6, PC7, PC6);
@@ -38,7 +38,7 @@ int main(void) {
 	char tmp[128];
 	uint16_t i = 0;
 	
-	cmcore_init();
+	armcmx_init();
 
 	Serial6.begin(19200);
 
@@ -142,9 +142,9 @@ int main(void) {
 		if ( partsec != (millis()%1000)/250 ) {
 			partsec = (millis()%1000)/250;
 			rtc.updateTime();
-			if ( I2C1Buffer.flagstatus & 0x80000000 ) {
+			if ( Wire1.flagstatus() & 0x80000000 ) {
 				Serial6.print(" I2C Status error ");
-				Serial6.println(I2C1Buffer.flagstatus, HEX);
+				Serial6.println(Wire1.flagstatus(), HEX);
 			}
 			Serial6.print((float)millis()/1000,3);Serial6.print(' ');
 
@@ -178,9 +178,9 @@ int main(void) {
 			//		lcd.clear();
 			lcd.setCursor(0, 0);
 			lcd.write((uint8_t *)message+((millis()/250)%(messlen-16)), 16);
-			if ( I2C1Buffer.flagstatus & 0x80000000 ) {
+			if ( Wire1.flagstatus() & 0x80000000 ) {
 				Serial6.print(" I2C Status error ");
-				Serial6.println(I2C1Buffer.flagstatus, HEX);
+				Serial6.println(Wire1.flagstatus(), HEX);
 			}
 
 		}
