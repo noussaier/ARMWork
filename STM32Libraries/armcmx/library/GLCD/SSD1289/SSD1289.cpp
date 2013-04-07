@@ -1023,7 +1023,7 @@ void SSD1289::WriteBMP(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Wid
 {
   volatile uint32_t index;
   uint16_t *bitmap_ptr = (uint16_t *)bitmap;
-  uint16_t i;
+//  uint16_t i;
   uint32_t size;
   size=(Height * Width);
   SetDisplayWindow(Xpos, Ypos,Height, Width);

@@ -1,40 +1,55 @@
-#define REAL_CONSTANT -0.35f //0.285
-#define IMG_CONSTANT  0.61f //0.01
+#include "stm32f4xx.h"
+#include "armcmx.h"
 
-#define REAL_CONSTANT2 -0.4f
-#define IMG_CONSTANT2  0.6f
+#include "SSD1289.h"
+//#include "touch_7846.h"
+#include "Julija.h"
 
-#define REAL_CONSTANT3  -0.70176f
-#define IMG_CONSTANT3   0.3842f
+//extern unsigned int xxx,yyy;
+//extern unsigned char flag;
 
-#define REAL_CONSTANT4  -0.835f
-#define IMG_CONSTANT4    0.2321f
+SSD1289 lcd;
 
-#define REAL_CONSTANT5 -0.8f
-#define IMG_CONSTANT5   0.156f
+void LCD_Init() {
+  lcd.init();
+  lcd.start();
+  lcd.DisplayOn();
+}
 
-#define REAL_CONSTANT6 -0.74543f
-#define IMG_CONSTANT6   0.11301f
+void LCD_Clear(uint16 c) {
+  lcd.SetBackColor(c);
+  lcd.clear();
+}
 
-#define REAL_CONSTANT7 -0.75f
-#define IMG_CONSTANT7  0.11f
-
-#define REAL_CONSTANT8 -0.1f
-#define IMG_CONSTANT8   0.651f
-
-
-#define REAL_CONSTANT9 0.001643721971153f
-#define IMG_CONSTANT9  0.822467633298876f
-
-#define ITERATION    256
-
-
-
-
-
-typedef struct {
-    float x, y;
-} Complex; 
+int main(void)
+{
+  int i = 1;
+	
+	armcmx_init();
+  
+	pinMode(PB0, OUTPUT);
+	digitalWrite(PB0, HIGH);
+	delay_us(6000); // Delay(0x3FFFFF);		// 6242 usec
+	/*
+	digitalWrite(PB0, LOW);
+  Delay(90);	//	9.125 usec
+	digitalWrite(PB0, HIGH);
+	Delay(3000);		// 286.375 usec
+	digitalWrite(PB0, LOW);
+  Delay(50);	//	5.375 usec
+	digitalWrite(PB0, HIGH);
+	*/
+  LCD_Init();
+	delay_us(6000); // Delay(0x3FFFFF);
+  LCD_Clear(WHITE);
+  while(1)
+  {
+    Julia2(240,320,120,160,i);
+    i+=10;
+    if(i>1000)
+      i=0;
+  }
+}
 
 Complex complexSquare(Complex c){
     Complex cSq;
@@ -70,12 +85,9 @@ void madelbrot(int nx, int ny, int maxIter, float realMin, float realMax, float 
             else{
                 color = ASSEMBLE_RGB(cnt*5, 15*cnt, cnt*3);
             }
-            Pixel(y, x, color);
+            lcd.PutPixel(y, x, color);
        }
 }
-
-
-
 
 
 
@@ -105,7 +117,7 @@ void Julia(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset_
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(y,x,ASSEMBLE_RGB(i*1,i*2,i*3));
+      lcd.PutPixel(y,x,ASSEMBLE_RGB(i*1,i*2,i*3));
     }
   }
 }
@@ -136,7 +148,7 @@ void Julia2(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(i*8,i*18,i*13));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(i*8,i*18,i*13));
     }
   }
 }
@@ -167,7 +179,7 @@ void Julia3(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(i*12,i*38,i*18));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(i*12,i*38,i*18));
     }
   }
 }
@@ -198,7 +210,7 @@ void Julia4(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(i*8,i*18,i*38));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(i*8,i*18,i*38));
     }
   }
 }
@@ -229,7 +241,7 @@ void Julia5(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(256-i*8,256-i*18,256-i*38));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(256-i*8,256-i*18,256-i*38));
     }
   }
 }
@@ -260,7 +272,7 @@ void Julia6(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(i*25,i*18,i*15));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(i*25,i*18,i*15));
     }
   }
 }
@@ -290,7 +302,7 @@ void Julia7(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(i*8,i*5,i*38));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(i*8,i*5,i*38));
     }
   }
 }
@@ -320,7 +332,7 @@ void Julia8(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2;
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(i*24,i*18,i*10));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(i*24,i*18,i*10));
     }
   }
 }
@@ -351,7 +363,7 @@ void Julia9(uint16_t size_x, uint16_t size_y, uint16_t offset_x, uint16_t offset
           radius = tmp1 + tmp2; //+
           i++;
         }
-      Pixel(x,y,ASSEMBLE_RGB(i*8,i*18,i*38));
+      lcd.PutPixel(x,y,ASSEMBLE_RGB(i*8,i*18,i*38));
     }
   }
 }

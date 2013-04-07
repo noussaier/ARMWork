@@ -2,10 +2,10 @@
 #define __SSD1289_H
 
 #include "stm32f4xx.h"
-#include "AsciiLib.h"
 
 // armcmx delay
 #include "delay.h"
+#include "AsciiLib.h"
 
 #define Delay(x)  delay_us((x)/10)
 
