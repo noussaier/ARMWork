@@ -30,7 +30,21 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
+
+#if defined (USE_STM324xG_EVAL)
+#include "stm324xg_eval.h"
+#include "stm324xg_eval_lcd.h"
+#elif defined (OPEN407VC)
+#include "stm32_open407vc.h"
+#elif defined (OLIMEX_STM_E407)
+#include "olimex_stm_e407.h"
+#endif
+
 #include "stm32f4x7_eth_bsp.h"
+
+#ifdef ARMCMX
+#include "armcmx.h"
+#endif
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

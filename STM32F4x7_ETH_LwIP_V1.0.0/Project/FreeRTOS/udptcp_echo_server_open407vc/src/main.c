@@ -28,11 +28,6 @@
 #include "tcpip.h"
 //#include "serial_debug.h"
 
-#ifdef ARMCMX
-#include "armcmx.h"
-#include "stm32_open407vc.h"
-#include "stm_eval_comat.h"
-#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

@@ -1,3 +1,6 @@
+#ifndef _STM_EVAL_COMPAT_H_
+#define _STM_EVAL_COMPAT_H_
+
 #include "stm32f4xx.h"
 #include "armcmx.h"
 
@@ -14,3 +17,5 @@ void STM_EVAL_LEDToggle(Led_TypeDef Led);
 void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode);
 uint32_t STM_EVAL_PBGetState(Button_TypeDef Button);
 void STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct);
+
+#endif

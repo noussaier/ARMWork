@@ -348,9 +348,9 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,OPEN407VC,__FPU_PRESENT=1,HSE_VALUE=8000000</Define>
+              <Define>USE_STDPERIPH_DRIVER,ARMCMX,OPEN407VC,__FPU_PRESENT=1,HSE_VALUE=8000000,STDSERIAL=3</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\..\STM32Libraries\armcmx\utility;..\..\..\..\..\STM32Libraries\armcmx\utility\board;..\inc;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\FreeRTOS;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\portable\MDK-ARM\ARM_CM3;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\include;..\..\..\..\..\STM32Libraries\armcmx</IncludePath>
+              <IncludePath>..\..\..\..\..\STM32Libraries\armcmx;..\..\..\..\..\STM32Libraries\armcmx\utility;..\..\..\..\..\STM32Libraries\armcmx\utility\board;..\inc;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\FreeRTOS;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\portable\MDK-ARM\ARM_CM3;..\..\..\..\Utilities\Third_Party\FreeRTOS_v6.1.0\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -435,11 +435,6 @@
               <FileName>tcpecho.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\tcpecho.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\CMSIS\system_stm32f4xx.c</FilePath>
             </File>
             <File>
               <FileName>main.h</FileName>
@@ -690,6 +685,11 @@
               <FileName>stm32f4xx_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</FilePath>
             </File>
           </Files>
         </Group>
