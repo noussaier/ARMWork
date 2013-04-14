@@ -57,12 +57,12 @@
 //#define SERIAL_DEBUG    
 
 /* MAC ADDRESS*/
-#define MAC_ADDR0   02
-#define MAC_ADDR1   00
-#define MAC_ADDR2   00
-#define MAC_ADDR3   00
-#define MAC_ADDR4   00
-#define MAC_ADDR5   00
+#define MAC_ADDR0   0x00
+#define MAC_ADDR1   0x50
+#define MAC_ADDR2   0xc2
+#define MAC_ADDR3   0x97
+#define MAC_ADDR4   0x21
+#define MAC_ADDR5   0x73
  
 /*Static IP ADDRESS*/
 #define IP_ADDR0   192

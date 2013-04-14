@@ -30,7 +30,20 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
+#if defined (USE_STM324xG_EVAL)
+#include "stm324xg_eval.h"
+#include "stm324xg_eval_lcd.h"
+#elif defined (OPEN407VC)
+#include "stm32_open407vc.h"
+#elif defined (OLIMEX_STM_E407)
+#include "olimex_stm_e407.h"
+#endif
+
 #include "stm32f4x7_eth_bsp.h"
+
+#ifdef ARMCMX
+#include "armcmx.h"
+#endif
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -52,7 +65,7 @@ for debug purpose */
 /*Static IP ADDRESS*/
 #define IP_ADDR0   192
 #define IP_ADDR1   168
-#define IP_ADDR2   0
+#define IP_ADDR2   24
 #define IP_ADDR3   10
    
 /*NETMASK*/
@@ -64,7 +77,7 @@ for debug purpose */
 /*Gateway Address*/
 #define GW_ADDR0   192
 #define GW_ADDR1   168
-#define GW_ADDR2   0
+#define GW_ADDR2   24
 #define GW_ADDR3   1  
 
 /* MII and RMII mode selection, for STM324xG-EVAL Board(MB786) RevB ***********/

@@ -9,7 +9,7 @@
 #define STDUSART 	USART3
 #define STDRX 		PC11
 #define STDTX 		PC10
-#define STDBAUD 	115200
+#define STDBAUD 	57600
 #warning "using STDSERIAL USART3 for Open 407V-C"
 #else
 #define STDUSART 	USART3
