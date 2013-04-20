@@ -29,7 +29,7 @@
 
 void armcmx_init() {
 	// starting delay/millis system by timer2
-	TIM2_delaytimer_start();
+	TIMx_delaytimer_start();
 #ifdef STDSERIAL
 	usart_init(&stdserial, STDUSART, STDRX, STDTX);
 	usart_begin(&stdserial, STDBAUD);

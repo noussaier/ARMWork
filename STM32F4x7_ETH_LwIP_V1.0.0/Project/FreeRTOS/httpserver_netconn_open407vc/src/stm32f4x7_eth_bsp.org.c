@@ -21,7 +21,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4x7_eth.h"
-#include "stm32f4x7_eth_bspopen407vc.h"
+#include "stm32f4x7_eth_bsp.h"
 #include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/

@@ -29,6 +29,8 @@
 #include "httpserver-netconn.h"
 #include "serial_debug.h"
 
+#include "armcmx.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
@@ -66,6 +68,10 @@ int main(void)
   
 #ifdef SERIAL_DEBUG
   DebugComPort_Init();
+#endif
+#ifdef ARMCMX
+  armcmx_init();
+  printf("Hello.\n");
 #endif
 
   /*Initialize LCD and Leds */ 

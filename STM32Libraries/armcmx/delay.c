@@ -26,7 +26,7 @@ volatile uint32_t __countdown_millis;
  * @param  none
  * @retval None
  */
-void TIM2_delaytimer_start(void) {
+void TIMx_delaytimer_start(void) {
 	// TIM_TimeBaseInitTypeDef's order is {uint16_t TIM_Prescaler, uint16_t TIM_CounterMode, uint16_t TIM_Period, uint16_t TIM_ClockDivision, uint8_t TIM_RepetitionCounter}
 	TIM_TimeBaseInitTypeDef TimeBaseStructure;
 //			= { 84, TIM_CounterMode_Up, 999, TIM_CKD_DIV1, 0 };
@@ -44,9 +44,9 @@ void TIM2_delaytimer_start(void) {
 	//Supply APB1 Clock
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 	/* Time base configuration */
-	TIM_TimeBaseInit(TIM2, &TimeBaseStructure);
+	TIM_TimeBaseInit(DELAYTIMER, &TimeBaseStructure);
 //  TIM_SelectOnePulseMode(TIM2, TIM_OPMode_Repetitive);
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+	TIM_ITConfig(DELAYTIMER, TIM_IT_Update, ENABLE);
 
 	/* Enable the TIM2 gloabal Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
@@ -58,15 +58,15 @@ void TIM2_delaytimer_start(void) {
 	// reset time-passed counters
 	__counter_micros = 0;
 	__counter_millis = 0;
-	TIM_SetCounter(TIM2, 0);
+	TIM_SetCounter(DELAYTIMER, 0);
 	__countdown_millis = 0;
 	
 	/* TIM enable counter */
-	TIM_Cmd(TIM2, ENABLE);
+	TIM_Cmd(DELAYTIMER, ENABLE);
 }
 
 uint32_t micros(void) {
-	return __counter_micros + TIM_GetCounter(TIM2);
+	return __counter_micros + TIM_GetCounter(DELAYTIMER);
 }
 
 uint32_t millis(void) {
@@ -74,15 +74,15 @@ uint32_t millis(void) {
 }
 
 
-void TIM2_delaytimer_reset() {
+void TIMx_delaytimer_reset() {
 	__counter_millis = 0;
 	__counter_micros = 0;
-	TIM_SetCounter(TIM2, 0);
+	TIM_SetCounter(DELAYTIMER, 0);
 }
 
-void TIM2_delaytimer_up(void) {
-	uint32 tim2 = TIM_GetCounter(TIM2);
-	while( tim2 == TIM_GetCounter(TIM2) );
+void TIMx_delaytimer_up(void) {
+	uint32 tim2 = TIM_GetCounter(DELAYTIMER);
+	while( tim2 == TIM_GetCounter(DELAYTIMER) );
 }
 
 
@@ -95,11 +95,11 @@ void delay_ms(uint32_t w) {
 }
 
 void delay_us(uint32_t w) {
-	uint32 tim2 = TIM_GetCounter(TIM2);
+	uint32 tim2 = TIM_GetCounter(DELAYTIMER);
 	for ( ; w > 0 ; ) {
-		if (tim2 == TIM_GetCounter(TIM2)) 
+		if (tim2 == TIM_GetCounter(DELAYTIMER)) 
 			continue;
-		tim2 = TIM_GetCounter(TIM2);
+		tim2 = TIM_GetCounter(DELAYTIMER);
 		w--;
 	}
 }
@@ -119,8 +119,8 @@ uint8_t countdown_expired(void) {
 }
 
 void TIM2_IRQHandler(void) {
-	if (TIM_GetITStatus(TIM2, TIM_IT_Update ) == SET) {
-		TIM_ClearITPendingBit(TIM2, TIM_IT_Update );
+	if (TIM_GetITStatus(DELAYTIMER, TIM_IT_Update ) == SET) {
+		TIM_ClearITPendingBit(DELAYTIMER, TIM_IT_Update );
 		if ( __countdown_millis > 0 )
 			__countdown_millis--;
 		__counter_micros += 1000;

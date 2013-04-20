@@ -173,7 +173,7 @@
               = ((25 MHz / 25) * 240 ) / 2 = 120 MHz
    */
 #elif defined (STM32F4_DISCOVERY) || defined(OPEN407VC)
-#warning "PLL params for STM32F4 Discovery selected."
+#warning "PLL params for HSE 8MHz selected."
 
 //F4 Discovery
 #define PLL_M      8

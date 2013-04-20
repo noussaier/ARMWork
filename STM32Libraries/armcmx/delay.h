@@ -1,12 +1,12 @@
 /*
- * delay5.h
+ * delay.h
  *
  *  Created on: 2012/11/15
  *      Author: sin
  */
 
-#ifndef DELAY2_H_
-#define DELAY2_H_
+#ifndef _DELAY_H_
+#define _DELAY_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,6 +16,12 @@ extern "C" {
 #include <stdint.h>
 #include "stm32f4xx.h"
 #include "armcmx.h"
+
+#ifdef ARMCMX_TIMER
+#define DELAYTIMER  ARMCMX_TIMER
+#else
+#define DELAYTIMER TIM2
+#endif
 
 extern volatile uint32_t __counter_micros;
 extern volatile uint32_t __counter_millis;
@@ -29,10 +35,10 @@ extern volatile uint32_t __countdown_millis;
 uint32_t micros(void);
 uint32_t millis(void);
 	
-void TIM2_delaytimer_start(void);
-void TIM2_delaytimer_up(void);
-void TIM2_delaytimer_reset(void);
-void TIM2_IRQHandler(void);
+void TIMx_delaytimer_start(void);
+void TIMx_delaytimer_up(void);
+void TIMx_delaytimer_reset(void);
+void TIMx_IRQHandler(void);
 
 void delay_ms(uint32_t);
 void delay_us(uint32_t);
@@ -49,4 +55,4 @@ void delay_nop(uint32_t);
 #endif
 
 
-#endif /* DELAY5_H_ */
+#endif /* _DELAY_H_ */

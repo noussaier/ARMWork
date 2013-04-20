@@ -33,7 +33,6 @@ __IO uint8_t EthLinkStatus = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 static void ETH_GPIO_Config(void);
-static void ETH_NVIC_Config(void);
 static void ETH_MACDMA_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
@@ -45,20 +44,24 @@ static void ETH_MACDMA_Config(void);
   */
 void ETH_BSP_Config(void)
 {
+  RCC_ClocksTypeDef RCC_Clocks;
+  
   /* Configure the GPIO ports for ethernet pins */
   ETH_GPIO_Config();
   
-  /* Config NVIC for Ethernet */
-  ETH_NVIC_Config();
-
   /* Configure the Ethernet MAC/DMA */
   ETH_MACDMA_Config();
 
   if (EthInitStatus == 0)
   {
+#ifdef USE_LCD
     LCD_SetTextColor(Red);
     LCD_DisplayStringLine(Line5, (uint8_t*)"   Ethernet Init   ");
     LCD_DisplayStringLine(Line6, (uint8_t*)"      failed      ");
+#elif defined (ARMCMX)
+    printf("   Ethernet Init   \n");
+    printf("      failed      \n");
+#endif
     while(1);
   }
 
@@ -67,6 +70,13 @@ void ETH_BSP_Config(void)
 
   /* Configure the EXTI for Ethernet link status. */
   Eth_Link_EXTIConfig();
+  
+  /* Configure Systick clock source as HCLK */
+  SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK);
+
+  /* SystTick configuration: an interrupt every 10ms */
+  RCC_GetClocksFreq(&RCC_Clocks);
+  SysTick_Config(RCC_Clocks.HCLK_Frequency / 100);  
 }
 
 /**
@@ -80,8 +90,8 @@ static void ETH_MACDMA_Config(void)
 
   /* Enable ETHERNET clock  */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_ETH_MAC | RCC_AHB1Periph_ETH_MAC_Tx |
-                         RCC_AHB1Periph_ETH_MAC_Rx, ENABLE);                                             
-
+                        RCC_AHB1Periph_ETH_MAC_Rx, ENABLE);
+                        
   /* Reset ETHERNET on AHB Bus */
   ETH_DeInit();
 
@@ -134,9 +144,6 @@ static void ETH_MACDMA_Config(void)
 
   /* Configure Ethernet */
   EthInitStatus = ETH_Init(&ETH_InitStructure, DP83848_PHY_ADDRESS);
-
-  /* Enable the Ethernet Rx Interrupt */
-  ETH_DMAITConfig(ETH_DMA_IT_NIS | ETH_DMA_IT_R, ENABLE);
 }
 
 /**
@@ -147,7 +154,7 @@ static void ETH_MACDMA_Config(void)
 void ETH_GPIO_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-
+  
   /* Enable GPIOs clocks */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOB |
                          RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOI |
@@ -155,19 +162,20 @@ void ETH_GPIO_Config(void)
                          RCC_AHB1Periph_GPIOF, ENABLE);
 
   /* Enable SYSCFG clock */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
- 
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);  
+
   /* Configure MCO (PA8) */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;  
   GPIO_Init(GPIOA, &GPIO_InitStructure);
   
   /* MII/RMII Media interface selection --------------------------------------*/
 #ifdef MII_MODE /* Mode MII with STM324xG-EVAL  */
  #ifdef PHY_CLOCK_MCO
+
 
   /* Output HSE clock (25MHz) on MCO pin (PA8) to clock the PHY */
   RCC_MCO1Config(RCC_MCO1Source_HSE, RCC_MCO1Div_1);
@@ -178,27 +186,27 @@ void ETH_GPIO_Config(void)
 
   SYSCFG_ETH_MediaInterfaceConfig(SYSCFG_ETH_MediaInterface_RMII);
 #endif
-  
+
 /* Ethernet pins configuration ************************************************/
    /*
         ETH_MDIO -------------------------> PA2
         ETH_MDC --------------------------> PC1
-        ETH_PPS_OUT ----------------------> PB5
-        ETH_MII_CRS ----------------------> PH2
-        ETH_MII_COL ----------------------> PH3
-        ETH_MII_RX_ER --------------------> PI10
-        ETH_MII_RXD2 ---------------------> PH6
-        ETH_MII_RXD3 ---------------------> PH7
-        ETH_MII_TX_CLK -------------------> PC3
-        ETH_MII_TXD2 ---------------------> PC2
-        ETH_MII_TXD3 ---------------------> PB8
+        ETH_PPS_OUT ----------------------> NC //PB5
+        ETH_MII_CRS ----------------------> NC //PH2
+        ETH_MII_COL ----------------------> NC //PH3
+        ETH_MII_RX_ER --------------------> NC //PI10
+        ETH_MII_RXD2 ---------------------> NC //PH6
+        ETH_MII_RXD3 ---------------------> NC //PH7
+        ETH_MII_TX_CLK -------------------> NC //PC3
+        ETH_MII_TXD2 ---------------------> NC //PC2
+        ETH_MII_TXD3 ---------------------> NC //PB8
         ETH_MII_RX_CLK/ETH_RMII_REF_CLK---> PA1
         ETH_MII_RX_DV/ETH_RMII_CRS_DV ----> PA7
         ETH_MII_RXD0/ETH_RMII_RXD0 -------> PC4
         ETH_MII_RXD1/ETH_RMII_RXD1 -------> PC5
-        ETH_MII_TX_EN/ETH_RMII_TX_EN -----> PG11
-        ETH_MII_TXD0/ETH_RMII_TXD0 -------> PG13
-        ETH_MII_TXD1/ETH_RMII_TXD1 -------> PG14
+        ETH_MII_TX_EN/ETH_RMII_TX_EN -----> PB11 // PG11
+        ETH_MII_TXD0/ETH_RMII_TXD0 -------> PB12 // PG13
+        ETH_MII_TXD1/ETH_RMII_TXD1 -------> PB13 // PG14
                                                   */
 
   /* Configure PA1, PA2 and PA7 */
@@ -208,13 +216,16 @@ void ETH_GPIO_Config(void)
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_ETH);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_ETH);
 
+#if defined (USE_STM324xG_EVAL)
   /* Configure PB5 and PB8 */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_8;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_ETH);	
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource8, GPIO_AF_ETH);
+#endif
 
   /* Configure PC1, PC2, PC3, PC4 and PC5 */
+#if defined (USE_STM324xG_EVAL)
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5;
   GPIO_Init(GPIOC, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource1, GPIO_AF_ETH);
@@ -222,7 +233,15 @@ void ETH_GPIO_Config(void)
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource3, GPIO_AF_ETH);
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource4, GPIO_AF_ETH);
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource5, GPIO_AF_ETH);
+#elif defined(OPEN407VC)
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource1, GPIO_AF_ETH);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource4, GPIO_AF_ETH);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource5, GPIO_AF_ETH);
+#endif
                                 
+#if defined (USE_STM324xG_EVAL)
   /* Configure PG11, PG14 and PG13 */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_11 | GPIO_Pin_13 | GPIO_Pin_14;
   GPIO_Init(GPIOG, &GPIO_InitStructure);
@@ -242,26 +261,15 @@ void ETH_GPIO_Config(void)
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
   GPIO_Init(GPIOI, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOI, GPIO_PinSource10, GPIO_AF_ETH);
-}
-
-/**
-  * @brief  Configures and enable the Ethernet global interrupt.
-  * @param  None
-  * @retval None
-  */
-void ETH_NVIC_Config(void)
-{
-  NVIC_InitTypeDef   NVIC_InitStructure;
-
-  /* 2 bit for pre-emption priority, 2 bits for subpriority */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); 
-  
-  /* Enable the Ethernet global Interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel = ETH_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);    
+#endif
+#if defined(OPEN407VC)
+  /* Configure PB11 and PB12 */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13;
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_ETH);	
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource12, GPIO_AF_ETH);
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_ETH);
+#endif
 }
 
 /**
@@ -365,6 +373,19 @@ void Eth_Link_ITHandler(uint16_t PHYAddress)
       /* Display message on the LCD */
       LCD_DisplayStringLine(Line5, (uint8_t*)"  Network Cable is  ");
       LCD_DisplayStringLine(Line6, (uint8_t*)"   now connected    ");
+    }
+#elif defined (ARMCMX)
+    if(EthLinkStatus != 0)
+    {
+      /* Display message on the LCD */
+      printf("  Network Cable is  \n");
+      printf("     unplugged      \n");
+    }
+    else
+    {
+      /* Display message on the LCD */
+      printf("  Network Cable is  \n");
+      printf("   now connected    \n");
     }
 #endif
   }
