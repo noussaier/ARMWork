@@ -66,11 +66,11 @@ int main(void)
        startup file (startup_stm32f4xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */  
-  armcmx_init();
+     */
   
 #ifdef SERIAL_DEBUG
   DebugComPort_Init();
+  printf("\nHello.\n\n");
 #endif
 
   /*Initialize LCD and Leds */ 
@@ -160,11 +160,8 @@ void LCD_LED_Init(void)
   LCD_DisplayStringLine(Line3, (uint8_t*)MESSAGE4);
 #else
   printf(MESSAGE1);
-  printf("\n");
   printf(MESSAGE2);
-  printf("\n");
   printf(MESSAGE3);
-  printf("\n");
   printf(MESSAGE4);
   printf("\n");
 #endif

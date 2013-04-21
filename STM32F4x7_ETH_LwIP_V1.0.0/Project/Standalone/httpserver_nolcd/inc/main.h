@@ -31,29 +31,20 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 
-#if defined (USE_STM324xG_EVAL)
 #include "stm324xg_eval.h"
 #include "stm324xg_eval_lcd.h"
-#elif defined (OPEN407VC)
-#include "stm32_open407vc.h"
-#elif defined (OLIMEX_STM_E407)
-#include "olimex_stm_e407.h"
-#endif
 
 #include "stm32f4x7_eth_bsp.h"
 
-#ifdef ARMCMX
-#include "armcmx.h"
-#endif
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
 //#define USE_LCD        /* enable LCD  */  
-//#define USE_DHCP       /* enable DHCP, if disabled static address is used */
+#define USE_DHCP       /* enable DHCP, if disabled static address is used */
    
 /* Uncomment SERIAL_DEBUG to enables retarget of printf to serial port (COM1 on STM32 evalboard) 
    for debug purpose */   
-//#define SERIAL_DEBUG 
+#define SERIAL_DEBUG 
 
  
 /* MAC ADDRESS: MAC_ADDR0:MAC_ADDR1:MAC_ADDR2:MAC_ADDR3:MAC_ADDR4:MAC_ADDR5 */

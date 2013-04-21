@@ -348,9 +348,9 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER, OPEN407VC, HSE_VALUE=8000000, ARMCMX,STDSERIAL=3</Define>
+              <Define>USE_STDPERIPH_DRIVER, USE_OPEN407VC, HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>..\inc;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\Standalone;..\..\..\..\..\STM32Libraries\armcmx;..\..\..\..\..\STM32Libraries\armcmx\utility;..\..\..\..\..\STM32Libraries\armcmx\utility\board</IncludePath>
+              <IncludePath>..\inc;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\Standalone;..\..\..\..\..\STM32Libraries\armcmx;..\..\..\..\..\STM32Libraries\armcmx\utility;..\..\..\..\..\STM32Libraries\armcmx\utility\board;..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL;..\..\..\..\Utilities\STM32_EVAL\Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -407,11 +407,6 @@
               <FilePath>..\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>netconf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\netconf.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\stm32f4xx_it.c</FilePath>
@@ -440,6 +435,21 @@
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\CMSIS\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4x7_eth_bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\stm32f4x7_eth_bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>netconf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\netconf.c</FilePath>
+            </File>
+            <File>
+              <FileName>serial_debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\serial_debug.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -699,47 +709,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>armcmx</GroupName>
+          <GroupName>STM324xG_EVAL</GroupName>
           <Files>
             <File>
-              <FileName>armcmx.c</FileName>
+              <FileName>stm324xg_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\armcmx.c</FilePath>
-            </File>
-            <File>
-              <FileName>armcmx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\armcmx.h</FilePath>
-            </File>
-            <File>
-              <FileName>delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\delay.h</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm_eval_compat.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\board\stm_eval_compat.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4x7_eth_bsp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\STM32Libraries\armcmx\utility\board\stm32f4x7_eth_bsp.c</FilePath>
+              <FilePath>..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c</FilePath>
             </File>
           </Files>
         </Group>

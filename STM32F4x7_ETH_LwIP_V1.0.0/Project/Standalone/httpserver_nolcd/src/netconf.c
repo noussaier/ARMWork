@@ -88,19 +88,18 @@ void LwIP_Init(void)
   IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
   IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
 
-#if defined (USE_LCD)  
    iptab[0] = IP_ADDR3;
    iptab[1] = IP_ADDR2;
    iptab[2] = IP_ADDR1;
    iptab[3] = IP_ADDR0;
 
    sprintf((char*)iptxt, "  %d.%d.%d.%d", iptab[3], iptab[2], iptab[1], iptab[0]); 
-      
-   LCD_DisplayStringLine(Line8, (uint8_t*)"  Static IP address   ");
-   LCD_DisplayStringLine(Line9, iptxt);
-#else
-   printf("  Static IP address   \n");
-   printf("  %d.%d.%d.%d\n", iptab[3], iptab[2], iptab[1], iptab[0]); 
+#ifdef USE_LCD 
+  LCD_DisplayStringLine(Line8, (uint8_t*)"  Static IP address   ");
+  LCD_DisplayStringLine(Line9, iptxt);
+#elif defined SERIAL_DEBUG
+  printf(iptxt);
+  printf("\n");
 #endif
 #endif
 
@@ -207,13 +206,14 @@ void LwIP_DHCP_Process_Handle()
       IPaddress = 0;
       DHCP_state = DHCP_WAIT_ADDRESS;
 #ifdef USE_LCD
-      LCD_DisplayStringLine(Line4, (uint8_t*)"     Looking for    ");
-      LCD_DisplayStringLine(Line5, (uint8_t*)"     DHCP server    ");
-      LCD_DisplayStringLine(Line6, (uint8_t*)"     please wait... ");
-#else
-      printf("     Looking for    \n");
-      printf("     DHCP server    \n");
-      printf("     please wait... \n");
+        LCD_DisplayStringLine(Line4, (uint8_t*)"     Looking for    ");
+        LCD_DisplayStringLine(Line5, (uint8_t*)"     DHCP server    ");
+        LCD_DisplayStringLine(Line6, (uint8_t*)"     please wait... ");
+#elif defined SERIAL_DEBUG
+        printf("     Looking for    ");
+        printf("     DHCP server    ");
+        printf("     please wait... ");
+        printf("\n");
 #endif
     }
     break;
@@ -230,7 +230,6 @@ void LwIP_DHCP_Process_Handle()
         /* Stop DHCP */
         dhcp_stop(&netif);
 
-#ifdef USE_LCD      
         iptab[0] = (uint8_t)(IPaddress >> 24);
         iptab[1] = (uint8_t)(IPaddress >> 16);
         iptab[2] = (uint8_t)(IPaddress >> 8);
@@ -238,25 +237,20 @@ void LwIP_DHCP_Process_Handle()
 
         sprintf((char*)iptxt, " %d.%d.%d.%d", iptab[3], iptab[2], iptab[1], iptab[0]);       
 
+#ifdef USE_LCD  
         LCD_ClearLine(Line4);
         LCD_ClearLine(Line5);
         LCD_ClearLine(Line6);
-
         /* Display the IP address */
         LCD_DisplayStringLine(Line7, (uint8_t*)"IP address assigned ");
         LCD_DisplayStringLine(Line8, (uint8_t*)"  by a DHCP server  ");
         LCD_DisplayStringLine(Line9, iptxt);
-#else
-        iptab[0] = (uint8_t)(IPaddress >> 24);
-        iptab[1] = (uint8_t)(IPaddress >> 16);
-        iptab[2] = (uint8_t)(IPaddress >> 8);
-        iptab[3] = (uint8_t)(IPaddress);
-
-        /* Display the IP address */
-        printf("IP address assigned \n");
-        printf("  by a DHCP server  \n");
-        printf(" %d.%d.%d.%d\n", iptab[3], iptab[2], iptab[1], iptab[0]);
-#endif
+#elif defined SERIAL_DEBUG
+        printf("IP address assigned ");
+        printf("  by a DHCP server  ");
+        printf((char*)iptxt);
+        printf("\n");
+#endif  
         STM_EVAL_LEDOn(LED1);
       }
       else
@@ -276,32 +270,28 @@ void LwIP_DHCP_Process_Handle()
           netif_set_addr(&netif, &ipaddr , &netmask, &gw);
 
 #ifdef USE_LCD   
-          LCD_DisplayStringLine(Line7, (uint8_t*)"    DHCP timeout    ");
+            LCD_DisplayStringLine(Line7, (uint8_t*)"    DHCP timeout    ");
+#endif
 
-          iptab[0] = IP_ADDR3;
-          iptab[1] = IP_ADDR2;
-          iptab[2] = IP_ADDR1;
-          iptab[3] = IP_ADDR0;
+            iptab[0] = IP_ADDR3;
+            iptab[1] = IP_ADDR2;
+            iptab[2] = IP_ADDR1;
+            iptab[3] = IP_ADDR0;
 
-          sprintf((char*)iptxt, "  %d.%d.%d.%d", iptab[3], iptab[2], iptab[1], iptab[0]); 
+            sprintf((char*)iptxt, "  %d.%d.%d.%d", iptab[3], iptab[2], iptab[1], iptab[0]); 
+#ifdef USE_LCD   
+            LCD_ClearLine(Line4);
+            LCD_ClearLine(Line5);
+            LCD_ClearLine(Line6);
+            LCD_DisplayStringLine(Line8, (uint8_t*)"  Static IP address   ");
+            LCD_DisplayStringLine(Line9, iptxt);
+#elif defined SERIAL_DEBUG
+            printf("    DHCP timeout    ");
+            printf("  Static IP address   ");
+            printf(iptxt);
+            printf("\n");
+#endif
 
-          LCD_ClearLine(Line4);
-          LCD_ClearLine(Line5);
-          LCD_ClearLine(Line6);
-
-          LCD_DisplayStringLine(Line8, (uint8_t*)"  Static IP address   ");
-          LCD_DisplayStringLine(Line9, iptxt);         
-#else
-          printf("    DHCP timeout    \n");
-
-          iptab[0] = IP_ADDR3;
-          iptab[1] = IP_ADDR2;
-          iptab[2] = IP_ADDR1;
-          iptab[3] = IP_ADDR0;
-
-          printf("  Static IP address   \n");
-          printf("  %d.%d.%d.%d\n", iptab[3], iptab[2], iptab[1], iptab[0]); 
-#endif    
           STM_EVAL_LEDOn(LED1);
         }
       }

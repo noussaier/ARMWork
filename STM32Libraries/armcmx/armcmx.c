@@ -5,7 +5,7 @@
 
 #if defined (STDSERIAL)
 #if (STDSERIAL == 3)
-#if defined(OPEN407VC)
+#if defined(USE_OPEN407VC)
 #define STDUSART 	USART3
 #define STDRX 		PC11
 #define STDTX 		PC10

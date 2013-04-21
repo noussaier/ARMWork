@@ -152,7 +152,7 @@
 
 /************************* PLL Parameters *************************************/
 
-#if defined (OLIMEX_STM_E407)
+#if defined (USE_OLIMEX_STM_E407)
 #warning "PLL params for Olimex STM32_E407 selected."
 /* PLLVCO = (HSE_VALUE / PLL_M) * PLL_N */   
 #define PLL_M   12 /* (HSE_VALUE / 1000000) */  /* Possible value 0 and 63 */
@@ -172,7 +172,7 @@
               = ((HSE_VALUE / PLL_M) * PLL_N) / PLL_P
               = ((25 MHz / 25) * 240 ) / 2 = 120 MHz
    */
-#elif defined (STM32F4_DISCOVERY) || defined(OPEN407VC)
+#elif defined (USE_F4DISCOVERY) || defined(USE_OPEN407VC)
 #warning "PLL params for HSE 8MHz selected."
 
 //F4 Discovery

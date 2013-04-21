@@ -223,7 +223,7 @@ void LwIP_DHCP_Process_Handle()
         /* Stop DHCP */
         dhcp_stop(&netif);
 
-#ifdef USE_LCD      
+//#ifdef USE_LCD      
         iptab[0] = (uint8_t)(IPaddress >> 24);
         iptab[1] = (uint8_t)(IPaddress >> 16);
         iptab[2] = (uint8_t)(IPaddress >> 8);
@@ -234,11 +234,13 @@ void LwIP_DHCP_Process_Handle()
         LCD_ClearLine(Line4);
         LCD_ClearLine(Line5);
         LCD_ClearLine(Line6);
-
+#ifdef USE_LCD   
         /* Display the IP address */
         LCD_DisplayStringLine(Line7, (uint8_t*)"IP address assigned ");
         LCD_DisplayStringLine(Line8, (uint8_t*)"  by a DHCP server  ");
         LCD_DisplayStringLine(Line9, iptxt);
+#elif defined SERIAL_DEBUG
+      printf("IP address assigned by a DHCP server %s\n", iptxt);
 #endif
         STM_EVAL_LEDOn(LED1);
       }
@@ -274,7 +276,19 @@ void LwIP_DHCP_Process_Handle()
 
           LCD_DisplayStringLine(Line8, (uint8_t*)"  Static IP address   ");
           LCD_DisplayStringLine(Line9, iptxt);         
+#elif defined SERIAL_DEBUG
+          printf("    DHCP timeout    \n");
+
+          iptab[0] = IP_ADDR3;
+          iptab[1] = IP_ADDR2;
+          iptab[2] = IP_ADDR1;
+          iptab[3] = IP_ADDR0;
+
+          sprintf((char*)iptxt, "  %d.%d.%d.%d", iptab[3], iptab[2], iptab[1], iptab[0]); 
+
+        printf("  Static IP address  %s\n",iptxt);         
 #endif    
+
           STM_EVAL_LEDOn(LED1);
         }
       }
