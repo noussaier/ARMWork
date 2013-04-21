@@ -58,7 +58,7 @@ void ETH_BSP_Config(void)
     LCD_SetTextColor(Red);
     LCD_DisplayStringLine(Line5, (uint8_t*)"   Ethernet Init   ");
     LCD_DisplayStringLine(Line6, (uint8_t*)"      failed      ");
-#elif defined (ARMCMX)
+#else
     printf("   Ethernet Init   \n");
     printf("      failed      \n");
 #endif
@@ -374,7 +374,7 @@ void Eth_Link_ITHandler(uint16_t PHYAddress)
       LCD_DisplayStringLine(Line5, (uint8_t*)"  Network Cable is  ");
       LCD_DisplayStringLine(Line6, (uint8_t*)"   now connected    ");
     }
-#elif defined (ARMCMX)
+#else
     if(EthLinkStatus != 0)
     {
       /* Display message on the LCD */

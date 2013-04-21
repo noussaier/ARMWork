@@ -32,6 +32,9 @@
 #include "stm32f4xx.h"
 #include "stm32f4x7_eth_bsp.h"
 
+#ifdef ARMCMX
+#include "armcmx.h"
+#endif
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 //#define USE_LCD        /* enable LCD  */  
@@ -53,7 +56,7 @@ for debug purpose */
 #define IP_ADDR0   192
 #define IP_ADDR1   168
 #define IP_ADDR2   24
-#define IP_ADDR3   10
+#define IP_ADDR3   108
    
 /*NETMASK*/
 #define NETMASK_ADDR0   255

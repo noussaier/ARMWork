@@ -42,14 +42,14 @@ void TIMx_delaytimer_start(void) {
 	TimeBaseStructure.TIM_RepetitionCounter = 0;
 
 	//Supply APB1 Clock
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+	RCC_APB1PeriphClockCmd(DELAYRCCPERIPH, ENABLE);
 	/* Time base configuration */
-	TIM_TimeBaseInit(DELAYTIMER, &TimeBaseStructure);
+	TIM_TimeBaseInit(DELAYTIMx, &TimeBaseStructure);
 //  TIM_SelectOnePulseMode(TIM2, TIM_OPMode_Repetitive);
-	TIM_ITConfig(DELAYTIMER, TIM_IT_Update, ENABLE);
+	TIM_ITConfig(DELAYTIMx, TIM_IT_Update, ENABLE);
 
 	/* Enable the TIM2 gloabal Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannel = DELAYIRQCHANNEL;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -58,15 +58,15 @@ void TIMx_delaytimer_start(void) {
 	// reset time-passed counters
 	__counter_micros = 0;
 	__counter_millis = 0;
-	TIM_SetCounter(DELAYTIMER, 0);
+	TIM_SetCounter(DELAYTIMx, 0);
 	__countdown_millis = 0;
 	
 	/* TIM enable counter */
-	TIM_Cmd(DELAYTIMER, ENABLE);
+	TIM_Cmd(DELAYTIMx, ENABLE);
 }
 
 uint32_t micros(void) {
-	return __counter_micros + TIM_GetCounter(DELAYTIMER);
+	return __counter_micros + TIM_GetCounter(DELAYTIMx);
 }
 
 uint32_t millis(void) {
@@ -77,12 +77,12 @@ uint32_t millis(void) {
 void TIMx_delaytimer_reset() {
 	__counter_millis = 0;
 	__counter_micros = 0;
-	TIM_SetCounter(DELAYTIMER, 0);
+	TIM_SetCounter(DELAYTIMx, 0);
 }
 
 void TIMx_delaytimer_up(void) {
-	uint32 tim2 = TIM_GetCounter(DELAYTIMER);
-	while( tim2 == TIM_GetCounter(DELAYTIMER) );
+	uint32 timx = TIM_GetCounter(DELAYTIMx);
+	while( timx == TIM_GetCounter(DELAYTIMx) );
 }
 
 
@@ -95,11 +95,11 @@ void delay_ms(uint32_t w) {
 }
 
 void delay_us(uint32_t w) {
-	uint32 tim2 = TIM_GetCounter(DELAYTIMER);
+	uint32 timx = TIM_GetCounter(DELAYTIMx);
 	for ( ; w > 0 ; ) {
-		if (tim2 == TIM_GetCounter(DELAYTIMER)) 
+		if (timx == TIM_GetCounter(DELAYTIMx)) 
 			continue;
-		tim2 = TIM_GetCounter(DELAYTIMER);
+		timx = TIM_GetCounter(DELAYTIMx);
 		w--;
 	}
 }
@@ -118,9 +118,9 @@ uint8_t countdown_expired(void) {
 	return __countdown_millis == 0;
 }
 
-void TIM2_IRQHandler(void) {
-	if (TIM_GetITStatus(DELAYTIMER, TIM_IT_Update ) == SET) {
-		TIM_ClearITPendingBit(DELAYTIMER, TIM_IT_Update );
+void DELAYIRQHANDLER(void) {
+	if (TIM_GetITStatus(DELAYTIMx, TIM_IT_Update ) == SET) {
+		TIM_ClearITPendingBit(DELAYTIMx, TIM_IT_Update );
 		if ( __countdown_millis > 0 )
 			__countdown_millis--;
 		__counter_micros += 1000;

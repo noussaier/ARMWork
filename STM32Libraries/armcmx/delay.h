@@ -17,10 +17,11 @@ extern "C" {
 #include "stm32f4xx.h"
 #include "armcmx.h"
 
-#ifdef ARMCMX_TIMER
-#define DELAYTIMER  ARMCMX_TIMER
-#else
-#define DELAYTIMER TIM2
+#if (!defined (DELAYTIMER) ) || ( DELAYTIMER==2 )
+#define DELAYTIMx           TIM2
+#define DELAYIRQHANDLER     TIM2_IRQHandler
+#define DELAYIRQCHANNEL     TIM2_IRQn
+#define DELAYRCCPERIPH      RCC_APB1Periph_TIM2
 #endif
 
 extern volatile uint32_t __counter_micros;
