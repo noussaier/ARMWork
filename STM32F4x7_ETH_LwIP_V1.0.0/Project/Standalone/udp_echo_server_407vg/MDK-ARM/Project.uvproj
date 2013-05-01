@@ -350,7 +350,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F4XX,USE_OPEN407VC,HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>..\inc;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\STM32_EVAL\Common;..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\Standalone;..\..\..\..\..\STM32Libraries\armcmx\utility\board</IncludePath>
+              <IncludePath>..\inc;..\..\..\..\..\STM32Libraries\armcmx\utility\board;..\..\..\..\Libraries\CMSIS\Include;..\..\..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\..\..\Libraries\STM32F4x7_ETH_Driver\inc;..\..\..\..\Utilities\STM32_EVAL\Common;..\..\..\..\Utilities\STM32_EVAL\STM3240_41_G_EVAL;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\lwip;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\netif;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\src\include\ipv4;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7;..\..\..\..\Utilities\Third_Party\lwip_v1.3.2\port\STM32F4x7\Standalone</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

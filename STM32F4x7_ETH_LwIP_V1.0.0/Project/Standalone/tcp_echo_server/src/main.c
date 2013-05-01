@@ -63,7 +63,7 @@ int main(void)
 
 #ifdef SERIAL_DEBUG
   DebugComPort_Init();  
-  printf("\Thank you for your running me.\n\n");
+  printf("\nThank you for your invocation.\n\n");
 #endif
 
   /*Initialize LCD and Leds */ 

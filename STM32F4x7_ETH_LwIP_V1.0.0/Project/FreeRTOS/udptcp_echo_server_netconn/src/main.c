@@ -92,6 +92,7 @@ int main(void)
 
 #ifdef SERIAL_DEBUG
   DebugComPort_Init();
+  printf("\nHello.\n\n");
 #endif
   
   /*Initialize LCD and Leds */ 
@@ -157,6 +158,8 @@ void LCD_LED_Init(void)
   LCD_DisplayStringLine(Line1, (uint8_t*)MESSAGE2);
   LCD_DisplayStringLine(Line2, (uint8_t*)MESSAGE3);
   LCD_DisplayStringLine(Line3, (uint8_t*)MESSAGE4);  
+#elif defined SERIAL_DEBUG
+  printf("%s\n%s\n%s\n%s\n\n", MESSAGE1, MESSAGE2, MESSAGE3, MESSAGE4);
 #endif
 }
 
